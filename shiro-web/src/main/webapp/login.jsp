@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+${errorInfo }
 <form action="login" method="post">
 	userName:<input type="text" name="userName"/><br/>
 	password:<input type="password" name="password"/><br/>
