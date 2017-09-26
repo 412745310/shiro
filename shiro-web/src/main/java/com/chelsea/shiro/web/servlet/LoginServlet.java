@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
 
@@ -34,11 +35,16 @@ public class LoginServlet extends HttpServlet{
 		Subject subject=SecurityUtils.getSubject();
 		UsernamePasswordToken token=new UsernamePasswordToken(userName, password);
 		try{
-			subject.login(token);	
+			subject.login(token);
+			Session session=subject.getSession();
+			System.out.println("sessionId:"+session.getId());
+			System.out.println("sessionHost:"+session.getHost());
+			System.out.println("sessionTimeout:"+session.getTimeout());
+			session.setAttribute("info", "session的数据");
 			resp.sendRedirect("success.jsp");
 		}catch(Exception e){
 			e.printStackTrace();
-			req.setAttribute("errorInfo", "�û��������������");
+			req.setAttribute("errorInfo", "用户名或密码错误");
 			req.getRequestDispatcher("login.jsp").forward(req, resp);
 		}
 	}
