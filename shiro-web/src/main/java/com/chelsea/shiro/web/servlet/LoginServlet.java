@@ -12,6 +12,8 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
+import com.chelsea.shiro.web.util.CryptographyUtil;
+
 
 public class LoginServlet extends HttpServlet{
 
@@ -33,7 +35,7 @@ public class LoginServlet extends HttpServlet{
 		String userName=req.getParameter("userName");
 		String password=req.getParameter("password");
 		Subject subject=SecurityUtils.getSubject();
-		UsernamePasswordToken token=new UsernamePasswordToken(userName, password);
+		UsernamePasswordToken token=new UsernamePasswordToken(userName, CryptographyUtil.md5(password, "java1234"));
 		try{
 			subject.login(token);
 			Session session=subject.getSession();
