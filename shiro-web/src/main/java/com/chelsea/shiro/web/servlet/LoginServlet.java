@@ -37,7 +37,12 @@ public class LoginServlet extends HttpServlet{
 		Subject subject=SecurityUtils.getSubject();
 		UsernamePasswordToken token=new UsernamePasswordToken(userName, CryptographyUtil.md5(password, "java1234"));
 		try{
-			subject.login(token);
+			if(subject.isRemembered()){
+				System.out.println("--------isRemembered--------");
+			}else{
+				token.setRememberMe(true);
+				subject.login(token);
+			}
 			Session session=subject.getSession();
 			System.out.println("sessionId:"+session.getId());
 			System.out.println("sessionHost:"+session.getHost());
