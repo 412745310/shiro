@@ -17,7 +17,7 @@ public class DbUtil {
 	 */
 	public Connection getCon() throws Exception{
 		Class.forName("com.mysql.jdbc.Driver");
-		Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/shiro?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC", "root", "123456");
+		Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/shiro?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=true", "root", "123456");
 		return con;
 	}
 	
